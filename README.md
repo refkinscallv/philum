@@ -1,5 +1,5 @@
 <p align="center" style="margin: 20px auto">
-  <img src="https://philum.callvgroup.net/images/philum_loho.png" height="150">
+  <img src="https://philum.callvgroup.net/images/philum_logo.png" height="150">
 </p>
 
 # Philum - PHP Framework MVC
