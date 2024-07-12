@@ -7,7 +7,7 @@
  * |  __/| | | | | | |_| | | | | | |
  * |_|   |_| |_|_|_|\__,_|_| |_| |_|
  * 
- * Philum 0.0.1-dev
+ * Philum 1.0-dev
  * Traditional PHP Framework with MVC Architecture, Routing and Query Builder
  * 
  * (c) Callv Group 2024

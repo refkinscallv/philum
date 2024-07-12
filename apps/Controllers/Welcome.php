@@ -11,7 +11,11 @@
         }
 
         public function index() {
-            echo "Halo";
+            $this->outputView->render("welcome", [
+                "appLogo" => "https://philum.callvgroup.net/images/philum_logo.png",
+                "appName" => "Philum",
+                "appDesc" => "Traditional PHP Framework with MVC Architecture, Routing and Query Builder"
+            ]);
         }
 
     }
