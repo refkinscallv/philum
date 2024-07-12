@@ -23,7 +23,7 @@ To set up your PHP Framework MVC with Composer and start building your web appli
 ### Composer Install
 
 ```bash
-composer create-project philum/appstarter project-root
+composer create-project --stability=dev philum/appstarter project-root
 cd project-root
 ```
 
