@@ -239,7 +239,7 @@
         &copy; <a href="https://callvgroup.net" class="fw-bold">Callv Group</a> 2024
     </div>
     <div>
-        Version <b>1.0.1</b>
+        Version <b>1.2.2</b>
     </div>
 </footer>
 
