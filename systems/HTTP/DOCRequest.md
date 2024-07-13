@@ -128,6 +128,20 @@ To get the request URI:
 $uri = $request->getUri();
 ```
 
+## Accessing Server Variables
+
+To get a specific `$_SERVER` variable by key:
+
+```php
+$serverVar = $request->getServer('SERVER_NAME');
+```
+
+To get all `$_SERVER` variables:
+
+```php
+$serverVars = $request->getServers();
+```
+
 ## Example Usage
 
 Here is a complete example of how to use the `Request` class in a script:

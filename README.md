@@ -18,6 +18,11 @@ Traditional PHP Framework with MVC Architecture, Routing and Query Builder
 
 To set up your PHP Framework MVC with Composer and start building your web application, follow these detailed steps:
 
+## Other Docs
+
+- [HTTP Request Handler](https://github.com/refkinscallv/philum/blob/main/systems/HTTP/DOCRequest.md)
+- [MySQLi Query Builder](https://github.com/refkinscallv/philum/blob/main/systems/Database/MySQLi/DOC.md)
+
 ## Installation
 
 ### Composer Install
