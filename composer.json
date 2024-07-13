@@ -1,7 +1,7 @@
 {
     "name": "refkinscallv/philum",
     "description": "Traditional PHP Framework with MVC Architecture, Routing and Query Builder",
-    "version": "1.0-dev",
+    "version": "1.0.1",
     "type": "project",
     "require": {
         "php": ">=7.3",
