@@ -22,7 +22,7 @@
             "email": "dev@callvgroup.net"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "config": {
         "platform": {
             "php": "7.4"
