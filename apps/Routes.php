@@ -24,7 +24,7 @@
              * @param string | apps/Controllers/File/ | Class@Method
              * ----------------------------------------------------------
              */
-            $this->routes->setMaintenance("Page@maintenance");
+            // $this->routes->setMaintenance("Page@maintenance");
 
             /**
              * ----------------------------------------------------------
@@ -58,7 +58,7 @@
              * ----------------------------------------------------------
              */
             
-            $this->route->set("/about", "Page@about", true);
+            // $this->route->set("/about", "Page@about", true);
             
             $this->route->run();
         }
