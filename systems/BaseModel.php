@@ -31,14 +31,9 @@
         public Common $common;
 
         /**
-         * @var View $outputView
+         * @var MySQLi $dbMysqli
          */
-        public View $outputView;
-
-        /**
-         * @var Json $outputJson
-         */
-        public Json $outputJson;
+        public MySQLi $dbMysqli;
 
         public function __construct() {
             $this->common = new Common();
