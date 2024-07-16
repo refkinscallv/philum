@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Philum
+ * Traditional PHP Framework with MVC Architecture, Routing and Query Builder
+ * 
+ * (c) Callv Group 2024
+ */
+
+if (PHP_SAPI !== 'cli') {
+    die("This script must be run from the command line.");
+}
+
+const ANSI_COLOR_BLUE = "\033[0;34m";
+const ANSI_COLOR_GREEN = "\033[0;32m";
+const ANSI_COLOR_RED = "\033[0;31m";
+const ANSI_COLOR_RESET = "\033[0m";
+
+function runCommand(string $startMessage, string $command, string $successMessage = "", string $failureMessage = ""): int {
+    echo ANSI_COLOR_GREEN . $startMessage . ANSI_COLOR_RESET . "\n";
+    echo "$command...\n";
+    passthru($command, $status);
+    if ($status === 0) {
+        echo ANSI_COLOR_GREEN . "$successMessage" . ANSI_COLOR_RESET . "\n";
+    } else {
+        echo ANSI_COLOR_RED . "$failureMessage" . ANSI_COLOR_RESET . "\n";
+        exit($status);
+    }
+    return $status;
+}
+
+function generateGraffiti() {
+    $art = <<<ASCII
+ ____  _     _ _                 
+|  _ \| |__ (_) |_   _ _ __ ___  
+| |_) | '_ \| | | | | | '_ ` _ \ 
+|  __/| | | | | | |_| | | | | | |
+|_|   |_| |_|_|_|\__,_|_| |_| |_|
+ASCII;
+
+    $lines = explode("\n", $art);
+
+    foreach ($lines as $line) {
+        echo ANSI_COLOR_BLUE . $line . ANSI_COLOR_RESET . "\n";
+    }
+}
+
+function generateWatermark(): void {
+    echo "\n";
+    generateGraffiti();
+    echo ANSI_COLOR_BLUE . "Philum 1.2.5" . ANSI_COLOR_RESET . "\n";
+    echo ANSI_COLOR_BLUE . "Traditional PHP Framework with MVC Architecture, Routing and Query Builder" . ANSI_COLOR_RESET . "\n";
+    echo ANSI_COLOR_BLUE . "(c) Callv Group 2024" . ANSI_COLOR_RESET . "\n\n";
+}
+
+function main(): void {
+    generateWatermark();
+
+    runCommand(
+        '[Philum] Run the application.',
+        'php -S 127.0.0.1:8080'
+    );
+}
+
+main();

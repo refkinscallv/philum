@@ -65,6 +65,14 @@ Build the project foundation. Installing dependencies, generating configuration 
 php cli/build
 ```
 
+### Run The Application
+
+Run the application with the command below
+
+```bash
+php cli/start
+```
+
 ### Environment Configuration
 
 Edit the `.env` file with your preferred text editor:
@@ -79,7 +87,7 @@ ENVIRONMENT             = "development" # Set to 'development' or 'production'
 #--------------------------------------------------------------------
 
 APP_NAME                = "Philum"  # The name of your application
-BASE_URL                = "http://localhost/"   # The base URL of your application
+BASE_URL                = "http://127.0.0.1:8080/"   # The base URL of your application
 
 # DATABASE
 #--------------------------------------------------------------------

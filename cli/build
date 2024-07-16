@@ -16,7 +16,8 @@ const ANSI_COLOR_GREEN = "\033[0;32m";
 const ANSI_COLOR_RED = "\033[0;31m";
 const ANSI_COLOR_RESET = "\033[0m";
 
-function runCommand(string $command, string $successMessage, string $failureMessage): int {
+function runCommand(string $startMessage = "", string $command, string $successMessage = "", string $failureMessage = ""): int {
+    echo ANSI_COLOR_BLUE . $startMessage . ANSI_COLOR_RESET . "\n";
     echo "$command...\n";
     passthru($command, $status);
     if ($status === 0) {
@@ -63,30 +64,39 @@ ASCII;
     }
 }
 
-function main(): void {
-    echo ANSI_COLOR_BLUE . "[Philum] Build Application" . ANSI_COLOR_RESET . "\n";
+function generateWatermark(): void {
+    echo "\n";
     generateGraffiti();
-    echo ANSI_COLOR_BLUE . "Philum 1.2.4" . ANSI_COLOR_RESET . "\n";
+    echo ANSI_COLOR_BLUE . "Philum 1.2.5" . ANSI_COLOR_RESET . "\n";
     echo ANSI_COLOR_BLUE . "Traditional PHP Framework with MVC Architecture, Routing and Query Builder" . ANSI_COLOR_RESET . "\n";
-    echo ANSI_COLOR_BLUE . "(c) Callv Group 2024" . ANSI_COLOR_RESET . "\n";
+    echo ANSI_COLOR_BLUE . "(c) Callv Group 2024" . ANSI_COLOR_RESET . "\n\n";
+    echo ANSI_COLOR_BLUE . "[Philum] Build Application" . ANSI_COLOR_RESET . "\n\n";
+}
 
+function main(): void {
+    generateWatermark();
+    
     if (!file_exists('.env')) {
         runCommand(
+            '[Philum] Creating a configuration file.',
             'cp .env.example .env',
             '[Philum] .env file created successfully.',
             '[Philum] Failed to create .env file.'
         );
     } else {
+        echo ANSI_COLOR_BLUE . "[Philum] Creating a configuration file." . ANSI_COLOR_RESET . "\n";
         echo ANSI_COLOR_GREEN . "[Philum] .env file already exists." . ANSI_COLOR_RESET . "\n";
     }
 
     runCommand(
+        '[Philum] Installing dependencies.',
         'composer install',
         '[Philum] Composer install successfully.',
         '[Philum] Composer install failed.'
     );
 
     runCommand(
+        '[Philum] Generate autoload files.',
         'composer dump-autoload',
         '[Philum] Composer dump-autoload successfully.',
         '[Philum] Composer dump-autoload failed.'
