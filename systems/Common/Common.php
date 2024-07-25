@@ -14,6 +14,15 @@
         }
 
         /**
+         * Redirecting page
+         * 
+         * @param string $path
+         */
+        public function redirect($path = null) {
+            header("location: ". $this->baseUrl($path));
+        }
+
+        /**
          * Get HTTP response status message based on code.
          *
          * @param int $code

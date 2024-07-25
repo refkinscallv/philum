@@ -5,7 +5,7 @@
     use \Philum\Common\Common;
     use \Philum\Security\Crypto;
     use \Philum\Security\FormValidation;
-    use \Philum\Cookie\Cookie;
+    use \Philum\Storage\Cookie;
     use \Philum\Output\View;
     use \Philum\Output\Json;
     use \Philum\HTTP\Request;
@@ -48,6 +48,7 @@
         public Json $outputJson;
 
         public function __construct() {
+            $this->cookie = new Cookie();
             $this->common = new Common();
             $this->encryption = new Crypto();
             $this->formValidation = new FormValidation();

@@ -95,7 +95,7 @@
          *
          * @param mixed $mixedParam
          */
-        public function unset(mixed $mixedParam = null) {
+        public function unset($mixedParam = null) {
             $getCookie = $this->all();
 
             if (is_null($mixedParam)) {

@@ -13,39 +13,39 @@
         protected Database $DBConnection;
 
         /**
-         * @var mixed $cacheQuery
+         * @var $cacheQuery
          */
         private $cacheQuery = false;
 
         /**
-         * @var mixed $cacheSelect
+         * @var $cacheSelect
          */
         private $cacheSelect = false;
 
         /**
-         * @var mixed $cacheFrom
+         * @var $cacheFrom
          */
         private $cacheFrom = false;
         
         /**
-         * @var mixed $cacheWhere
+         * @var $cacheWhere
          */
-        private mixed $cacheWhere = false;
+        private $cacheWhere = false;
 
         /**
-         * @var mixed $cacheOrderBy
+         * @var $cacheOrderBy
          */
-        private mixed $cacheOrderBy = false;
+        private $cacheOrderBy = false;
 
         /**
-         * @var mixed $cacheLimit
+         * @var $cacheLimit
          */
-        private mixed $cacheLimit = false;
+        private $cacheLimit = false;
 
         /**
-         * @var mixed $cacheJoin
+         * @var $cacheJoin
          */
-        private mixed $cacheJoin = false;
+        private $cacheJoin = false;
 
         public function __construct() {
             $this->DBConnection = new Database();
@@ -75,7 +75,7 @@
          */
         public function from(string $table) {
             if($this->cacheSelect) {
-                $from = $this->cacheSelect ."FROM ". $this->sanitizeIdentifier($table);
+                $from = $this->cacheSelect ." FROM ". $this->sanitizeIdentifier($table);
                 $this->cacheFrom = $from;
             } else {
                 throw new Exception("Select statement is not initialized.");
@@ -87,9 +87,9 @@
         /**
          * Sets the WHERE part of the SQL query.
          *
-         * @param  mixed $condition - Condition for the WHERE clause.
+         * @param   $condition - Condition for the WHERE clause.
          */
-        public function where(mixed $condition) {
+        public function where( $condition) {
             $this->cacheWhere = " WHERE " . $this->buildCondition($condition);
 
             return $this;
@@ -98,10 +98,10 @@
         /**
          * Sets the WHERE IN part of the SQL query.
          *
-         * @param  mixed $column - Column name.
+         * @param   $column - Column name.
          * @param  array $values - Array of values.
          */
-        public function whereIn(mixed $column, array $values) {
+        public function whereIn( $column, array $values) {
             $escapedValues = array_map([$this->DBConnection->connection(), "real_escape_string"], $values);
             $this->cacheWhere = " WHERE " . $this->sanitizeIdentifier($column) . " IN ('" . implode("', '", $escapedValues) . "')";
 
@@ -111,7 +111,7 @@
         /**
          * Sets the WHERE NOT part of the SQL query.
          *
-         * @param  mixed $condition - Condition for the WHERE NOT clause.
+         * @param   $condition - Condition for the WHERE NOT clause.
          */
         public function whereNot($condition) {
             $this->cacheWhere = " WHERE NOT " . $this->buildCondition($condition);
@@ -122,7 +122,7 @@
         /**
          * Sets the ORDER BY part of the SQL query.
          *
-         * @param  mixed $order - Order condition.
+         * @param   $order - Order condition.
          */
         public function orderBy($order) {
             if(is_array($order)) {
@@ -138,7 +138,7 @@
         /**
          * Sets the LIMIT part of the SQL query.
          *
-         * @param  mixed $limit - Limit value.
+         * @param   $limit - Limit value.
          */
         public function limit($limit) {
             if(is_array($limit)) {
@@ -210,7 +210,7 @@
          * Executes the built SELECT query with a WHERE condition.
          *
          * @param  string|false $table - Optional table name.
-         * @param  mixed $where - WHERE condition.
+         * @param   $where - WHERE condition.
          * @return $this
          * @throws \Exception
          */
@@ -266,7 +266,7 @@
          *
          * @param  string $table - Table name.
          * @param  array $data - Data to update.
-         * @param  mixed $where - WHERE condition.
+         * @param   $where - WHERE condition.
          */
         public function update(string $table, array $data, $where) {
             $set = [];
@@ -285,7 +285,7 @@
          * Executes a DELETE query.
          *
          * @param  string $table - Table name.
-         * @param  mixed $where - WHERE condition.
+         * @param   $where - WHERE condition.
          */
         public function delete(string $table, $where) {
             $sql = "DELETE FROM " . $this->sanitizeIdentifier($table) . $this->buildCondition($where, true);
@@ -404,6 +404,19 @@
         }
 
         /**
+         *  Returns the number of rows in the result set. 
+         * 
+         * @return int
+         */
+        public function numRows() {
+            if (!$this->cacheQuery) {
+                throw new \Exception("No cached query result found.");
+            }
+        
+            return $this->cacheQuery->num_rows;
+        }
+
+        /**
          * ===========================
          * Helper
          * ===========================
@@ -416,9 +429,9 @@
          * @throws \Exception
          */
         private function buildFinalQuery($table = false) {
-            $sql = $this->cacheSelect;
-
+            $sql = "";
             if($table) {
+                $sql .= $this->cacheSelect;
                 $sql .= " FROM " . $this->sanitizeIdentifier($table);
             } else if($this->cacheFrom) {
                 $sql .= $this->cacheFrom;
@@ -445,10 +458,10 @@
         /**
          * Builds the WHERE condition.
          *
-         * @param  mixed $condition - Condition to build.
+         * @param   $condition - Condition to build.
          * @param  bool $useWhere - Use WHERE keyword (default: false).
          */
-        private function buildCondition(mixed $condition, bool $useWhere = false) {
+        private function buildCondition( $condition, bool $useWhere = false) {
             if(is_array($condition)) {
                 $conditions = [];
                 foreach($condition as $key => $value) {
@@ -466,7 +479,7 @@
          * @param  string $identifier - Identifier to sanitize.
          */
         private function sanitizeIdentifier(string $identifier) {
-            return preg_replace('/[^a-zA-Z0-9_]/', '', $identifier);
+            return preg_replace('/[^a-zA-Z0-9,*_]/', '', $identifier);
         }
 
         /**

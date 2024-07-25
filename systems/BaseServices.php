@@ -6,9 +6,8 @@
     use \Philum\Security\Crypto;
     use \Philum\Security\FormValidation;
     use \Philum\Storage\Cookie;
-    use \Philum\Database\MySQLi\MySQLi;
 
-    class BaseModel {
+    class BaseServices {
 
         /**
          * @var Cookie $cookie
@@ -30,17 +29,11 @@
          */
         public Common $common;
 
-        /**
-         * @var MySQLi $dbMysqli
-         */
-        public MySQLi $dbMysqli;
-
         public function __construct() {
             $this->cookie = new Cookie();
             $this->common = new Common();
             $this->encryption = new Crypto();
             $this->formValidation = new FormValidation();
-            $this->dbMysqli = new MySQLi();
         }
 
     }
